@@ -1,0 +1,75 @@
+@import "primeicons/primeicons.css";
+.menu{
+    position: fixed;
+    top: 0 ;
+    left: 0;
+    padding-top: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;    
+    height: 100vh;
+    background-color: white;
+    align-items: center;
+    border-radius: 0px 20px 0px 0px;
+    color: rgb(20, 20, 59);
+    transition: width 0.3s ease;
+    z-index: 100;
+    border: 2px solid rgb(228, 226, 226);
+    border-left: none;
+}
+.menu img{    
+   width: 66%; 
+   padding: 12px 0px 0px 0px;
+    box-sizing: border-box;
+ }
+ .pi-bars{
+    padding: 7px 0px;
+    height: 50px;
+    color: #3c80c9;
+    font-size: 22px;
+    padding: 10px 0px;
+    font-weight: 700;
+ }
+ .menu-items{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    position: relative;
+    width: 100%;
+    gap: 25px;
+    
+ }
+ .menu-item-text{
+    font-weight: 500;
+    
+ }
+ .menu-item {
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    padding: 10px 0px;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+    
+ }
+ .menu-item:hover{
+   background-color: #3c80c9;
+   color: white;
+ }
+ .menu-item i{
+   font-weight: 800;
+ }
+ .menu-item.active{
+   background-color: #3c80c9;
+   color: white;
+ }
+ .profile{
+    width: 100%;
+    position: absolute;
+    bottom: 120px;
+    display: flex;
+   flex-direction: column;  
+   gap: 30px;
+ }
+ 

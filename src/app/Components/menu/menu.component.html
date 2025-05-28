@@ -1,0 +1,28 @@
+<div class="menu" 
+    [style.opacity] = "opacity()"
+    [style.width]="menuWidth"    
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+    >
+      <img [style.display]="isImageVisible ? 'block' : 'none'" [src]="imgSource" />
+      <i [style.display]="isImageVisible ? 'none' : 'block'"  class="pi pi-bars"></i>
+      <div class="menu-items">
+        
+        <div [style.justifyContent] = "isImageVisible ? 'flex-start' : 'center'" [style.paddingLeft] = "isImageVisible ? '15px' : '0'" class ="menu-item" [routerLink]="''" routerLinkActive="active">
+          <i class="pi pi-file" style="font-size: 1.2rem"></i>
+          <span [style.display]="isImageVisible ? 'block' : 'none'" [style.marginLeft] class="menu-item-text">Documents</span>
+        </div>
+        
+    
+      </div>
+      <div class="profile">
+          <div [style.justifyContent] = "isImageVisible ? 'flex-start' : 'center'" [style.paddingLeft] = "isImageVisible ? '25px' : '0'" class ="menu-item">
+          <i class="pi pi-user" style="font-size: 1.0rem"></i>
+          <span [style.display]="isImageVisible ? 'block' : 'none'" [style.marginLeft] class="menu-item-text">Profile</span>
+        </div>
+        <div [style.justifyContent] = "isImageVisible ? 'flex-start' : 'center'" [style.paddingLeft] = "isImageVisible ? '25px' : '0'" class ="menu-item">
+          <i class="pi pi-sign-out" style="font-size: 1.0rem"></i>
+          <span [style.display]="isImageVisible ? 'block' : 'none'" [style.marginLeft] class="menu-item-text">Logout</span>
+        </div>
+      </div>
+    </div>

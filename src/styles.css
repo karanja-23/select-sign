@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap');
+:root{
+    --blue: rgb(21, 21, 66);
+    --headerBackground: #f8f9fa
+  }
+*{
+    font-family: "Ancizar Serif", serif;
+}

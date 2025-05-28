@@ -1,0 +1,45 @@
+<div class="pdf-viewer-container" *ngIf="isBrowser">
+    <div class="pdf-toolbar">
+      <button (click)="prevPage()" [disabled]="currentPage <= 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage >= totalPages">Next</button>
+      <button (click)="toggleSelectionMode()" 
+              [class.active]="selectionMode"
+              class="selection-toggle">
+        {{ selectionMode ? 'Cancel Selection' : 'Select Signature Area' }}
+      </button>
+    </div>
+    
+    <div class="pdf-canvas-container" 
+         [class.selection-mode]="selectionMode"
+         (mousedown)="onMouseDown($event)"
+         (mousemove)="onMouseMove($event)"
+         (mouseup)="onMouseUp($event)">
+      <canvas #pdfCanvas></canvas>
+      
+      <!-- Selection rectangle overlay -->
+      <div *ngIf="isSelecting" 
+           class="selection-rectangle"
+           [style.left.px]="selectionRect.x"
+           [style.top.px]="selectionRect.y"
+           [style.width.px]="selectionRect.width"
+           [style.height.px]="selectionRect.height">
+      </div>
+      
+      <!-- Show existing signature areas -->
+      <div *ngFor="let area of signatureAreas; let i = index"
+           class="signature-area"
+           [style.left.px]="area.x"
+           [style.top.px]="area.y"
+           [style.width.px]="area.width"
+           [style.height.px]="area.height">
+        <span class="area-label">Signature {{ i + 1 }}</span>
+        <button class="remove-area" (click)="removeSignatureArea(i)">×</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Show loading message for SSR -->
+  <div *ngIf="!isBrowser" class="ssr-placeholder">
+    <p>PDF viewer will load once the page is ready...</p>
+  </div>

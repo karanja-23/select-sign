@@ -1,0 +1,84 @@
+<!-- PDF Viewer Modal -->
+<div *ngIf="showPdfViewer" class="pdf-modal-overlay">
+  <div class="pdf-modal">
+    <div class="pdf-modal-header">
+      <h3>{{ selectedDocument?.name }}</h3>
+      <button class="close-button" (click)="closePdfViewer()">×</button>
+    </div>
+    <app-pdf-viewer 
+      [pdfUrl]="selectedDocument?.pdfBlobUrl"
+      (signatureAreaSelected)="onSignatureAreaSelected($event)">
+    </app-pdf-viewer>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading-message">Loading documents...</div>
+</ng-template>
+
+<!-- Show the full document UI only when initialized -->
+<div *ngIf="dataInitialized(); else loadingTemplate">
+  <div class="table-container" [style.opacity]="opacity()">
+
+    <!-- HEADER + SEARCH + BUTTONS -->
+    <div class="actions">
+      <div class="add-button">
+        <i class="pi pi-plus" style="font-size: 1rem"></i> Add new
+      </div>
+      <div class="search">
+        <input type="search" placeholder="Search" (input)="onSearch($event)" />
+        <i class="pi pi-search" style="font-size: 0.9rem"></i>
+      </div>
+    </div>
+
+    <!-- TABLE WRAPPER -->
+    <div class="custom-table-wrapper">
+      <table class="custom-docs-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date Created</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="paginatedDocuments().length > 0; else emptyMessage">
+          <tr *ngFor="let doc of paginatedDocuments()"
+              (mouseover)="hoveredRow = doc"
+              (mouseleave)="hoveredRow = null"
+              [ngStyle]="{
+                backgroundColor: hoveredRow === doc ? '#f1f1f1' : 'white',
+                color: hoveredRow === doc ? 'black' : 'black',
+                cursor: 'pointer'
+              }">
+            <td>{{ doc.name }}</td>
+            <td>{{ doc.date_created | date: 'yyyy-MM-dd HH:mm' }}</td>
+            <td>{{ doc.type }}</td>
+            <td>{{ doc.description }}</td>
+            <td>
+              <div class="buttons">
+                <div class="view-button" (click)="viewDocument(doc)">
+                  <i class="pi pi-eye" style="font-size: 1rem"></i> View
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Empty Message -->
+      <ng-template #emptyMessage>
+        <div class="empty-message">No documents found.</div>
+      </ng-template>
+    </div>
+
+    <!-- PAGINATOR -->
+    <div class="paginator">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+</div>
