@@ -21,8 +21,6 @@
     "@angular/router": "^19.2.0",
     "@angular/ssr": "^19.2.9",
     "express": "^4.18.2",
-    "ng2-pdf-viewer": "^10.4.0",
-    "ngx-extended-pdf-viewer": "^23.2.0",
     "pdfjs-dist": "^5.2.133",
     "primeicons": "^7.0.0",
     "primeng": "^19.1.1",
